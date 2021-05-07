@@ -1,0 +1,28 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Brewery {
+  id: ID!
+  name: String!
+  brewery_type: String!
+  street: String
+  address_2: String
+  address_3: String
+  city: String!
+  state: String!
+  county_province: String
+  postal_code: String!
+  country: String!
+  longitude: String!
+  latitude: String!
+  phone: String!
+  website_url: String!
+  updated_at: String!
+  created_at: String!
+}
+
+type Query {
+  breweries(searchText: String!): [Brewery!]!
+  brewery(id: String!): Brewery!
+}
