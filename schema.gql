@@ -23,6 +23,6 @@ type Brewery {
 }
 
 type Query {
-  breweries(searchText: String!): [Brewery!]!
+  breweries(searchText: String): [Brewery!]!
   brewery(id: String!): Brewery!
 }

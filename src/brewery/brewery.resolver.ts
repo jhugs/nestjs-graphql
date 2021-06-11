@@ -1,6 +1,6 @@
-import { Args, Query, Resolver } from '@nestjs/graphql';
-import { Brewery } from 'src/brewery/brewery.dto';
-import { BreweryService } from 'src/brewery/brewery.service';
+import { Args, Query, Resolver } from "@nestjs/graphql";
+import { Brewery } from "src/brewery/brewery.dto";
+import { BreweryService } from "src/brewery/brewery.service";
 
 @Resolver(() => Brewery)
 export class BreweryResolver {
@@ -8,13 +8,13 @@ export class BreweryResolver {
 
     @Query(() => [Brewery])
     async breweries(
-        @Args('searchText') searchText?: string,
+        @Args("searchText", { nullable: true }) searchText?: string,
     ): Promise<Brewery[]> {
         return this.breweryService.findAll(searchText);
     }
 
     @Query(() => Brewery)
-    async brewery(@Args('id') id: string): Promise<Brewery> {
+    async brewery(@Args("id") id: string): Promise<Brewery> {
         return this.breweryService.get(id);
     }
 }
