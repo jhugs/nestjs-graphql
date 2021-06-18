@@ -10,28 +10,55 @@ import {
     TableRow,
     TableBody,
     Button,
+    TextField,
 } from "@material-ui/core";
 import { useListBreweriesQuery } from "./graphql/autogenerate/hooks";
 
-const useStyles = makeStyles({
+const useTableStyles = makeStyles({
     table: {
         minWidth: 650,
+    },
+    form: {
+        marginTop: 16,
+        marginBottom: 16,
     },
 });
 
 function App() {
+    const [searchText, setSearchText] = useState("");
+    const [submittedSearch, setSubmittedSearch] = useState("");
     const [pageNumber, setPageNumber] = useState(0);
+
+    const searchQuery = submittedSearch == "" ? undefined : submittedSearch;
     const [query] = useListBreweriesQuery({
-        variables: { pageNumber: pageNumber + 1 },
+        variables: { pageNumber: pageNumber + 1, searchText: searchQuery },
     });
 
-    const classes = useStyles();
+    const classes = useTableStyles();
     const breweries = query.data?.breweries;
 
-    // WIP: Just testing the query.
-    // TODO: Setup routing and create a brewery page for listing, searching, etc.
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        setSubmittedSearch(searchText);
+    };
+
     return (
         <div className="App">
+            <form
+                className={classes.form}
+                noValidate
+                autoComplete="off"
+                onSubmit={handleSubmit}>
+                <TextField
+                    id="outlined-basic"
+                    label="Search"
+                    variant="outlined"
+                    type="search"
+                    value={searchText}
+                    onInput={(e) => setSubmittedSearch("")}
+                    onChange={(e) => setSearchText(e.target.value ?? "")}
+                />
+            </form>
             <TableContainer component={Paper}>
                 <Table className={classes.table} aria-label="simple table">
                     <TableHead>
@@ -44,7 +71,7 @@ function App() {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {breweries == null && <div>No results</div>}
+                        {breweries == null && "No results"}
                         {breweries != null &&
                             !query.fetching &&
                             breweries.map((brewery: any) => (
