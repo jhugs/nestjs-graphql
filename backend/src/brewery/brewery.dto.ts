@@ -23,7 +23,7 @@ export class Brewery {
     @Field()
     readonly city: string;
 
-    @Field()
+    @Field({ nullable: true })
     readonly state: string;
 
     @Field({ nullable: true })

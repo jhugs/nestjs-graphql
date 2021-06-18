@@ -2,14 +2,14 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
-import client from "./apollo";
-import { ApolloProvider } from "@apollo/client";
+import client from "./urql";
+import { Provider } from "urql";
 
 ReactDOM.render(
     <React.StrictMode>
-        <ApolloProvider client={client}>
+        <Provider value={client}>
             <App />
-        </ApolloProvider>
+        </Provider>
     </React.StrictMode>,
     document.getElementById("root"),
 );

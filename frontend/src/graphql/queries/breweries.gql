@@ -1,0 +1,11 @@
+
+query ListBreweries($pageNumber: Float!, $searchText: String) {
+    breweries(pageNumber:$pageNumber, searchText: $searchText) {
+        id
+        name
+        brewery_type
+        street
+        city
+        state
+    }
+}

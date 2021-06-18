@@ -1,0 +1,33 @@
+
+overwrite: true
+schema: "http://localhost:5000/graphql"
+
+# Format files
+hooks:
+    afterOneFileWrite:
+        - prettier --write
+generates:
+    # Get schemas from server
+    src/graphql/autogenerate/schemas.ts:
+        documents: "src/graphql/**/**.gql"
+        plugins:
+            - typescript
+    # Create operations based on queries
+    src/graphql/autogenerate/operations.ts:
+        documents: "src/graphql/**/**.gql"
+        preset: import-types
+        presetConfig:
+            typesPath: ./schemas
+        plugins:
+            - typescript-operations
+    # 1. Export GraphQL documents
+    # 2. React interface
+    src/graphql/autogenerate/hooks.ts:
+        documents: "src/graphql/**/**.gql"
+        preset: import-types
+        presetConfig:
+            typesPath: ./operations
+        plugins:
+            - typescript-urql
+        config:
+            typesPrefix: Types.

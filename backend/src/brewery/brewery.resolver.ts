@@ -8,9 +8,10 @@ export class BreweryResolver {
 
     @Query(() => [Brewery])
     async breweries(
+        @Args("pageNumber", { nullable: false }) pageNumber: number,
         @Args("searchText", { nullable: true }) searchText?: string,
     ): Promise<Brewery[]> {
-        return this.breweryService.findAll(searchText);
+        return this.breweryService.findAll(pageNumber, searchText);
     }
 
     @Query(() => Brewery)

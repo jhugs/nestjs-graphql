@@ -10,7 +10,7 @@ type Brewery {
   address_2: String
   address_3: String
   city: String!
-  state: String!
+  state: String
   county_province: String
   postal_code: String!
   country: String!
@@ -23,6 +23,6 @@ type Brewery {
 }
 
 type Query {
-  breweries(searchText: String): [Brewery!]!
+  breweries(searchText: String, pageNumber: Float!): [Brewery!]!
   brewery(id: String!): Brewery!
 }

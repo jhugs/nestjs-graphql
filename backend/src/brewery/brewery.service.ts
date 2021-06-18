@@ -4,16 +4,20 @@ import { AxiosResponse } from "axios";
 import { Observable } from "rxjs";
 
 const baseEndpoint = "https://api.openbrewerydb.org/breweries";
-const searchEndpoint = (searchText: string) =>
-    `${baseEndpoint}/search?query=${encodeURIComponent(searchText)}`;
+const searchEndpoint = `${baseEndpoint}/search`;
 
 @Injectable()
 export class BreweryService {
     constructor(private httpService: HttpService) {}
 
-    async findAll(searchText?: string): Promise<Brewery[]> {
+    async findAll(pageNumber: number, searchText?: string): Promise<Brewery[]> {
+        const endpoint = new URL(
+            searchText != null ? searchEndpoint : baseEndpoint,
+        );
+        endpoint.searchParams.append("query", searchText);
+        endpoint.searchParams.append("page", pageNumber.toString());
         const promise = await this._callApi<Array<Brewery>>(
-            searchText != null ? searchEndpoint(searchText) : baseEndpoint,
+            endpoint.toString(),
         );
         return promise.data;
     }
@@ -24,9 +28,8 @@ export class BreweryService {
     }
 
     private _callApi<T>(endpoint: string): Promise<AxiosResponse<T>> {
-        const res: Observable<AxiosResponse<T>> = this.httpService.get(
-            endpoint,
-        );
+        const res: Observable<AxiosResponse<T>> =
+            this.httpService.get(endpoint);
 
         return res.toPromise();
     }
