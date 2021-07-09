@@ -14,14 +14,38 @@ import {
 } from "@material-ui/core";
 import { useListBreweriesQuery } from "./graphql/autogenerate/hooks";
 
-const useTableStyles = makeStyles({
+const useStyles = makeStyles({
+    app: {
+        padding: 24,
+    },
+    tableRoot: {
+        maxHeight: "75vh",
+    },
     table: {
         minWidth: 650,
+        border: "1px solid #fb0",
+        '& tr,th,tbody,td': {
+            borderColor: "#fb0",
+        }
     },
     form: {
+        display: "flex",
         marginTop: 16,
         marginBottom: 16,
+        '& fieldset': {
+            borderColor: "#fb0"
+        }
     },
+    paging: {
+        marginTop: 8,
+        '& button': {
+            '&:first-of-type': {
+                marginRight: 8
+            },
+            padding: 8,
+            border: "1px solid #fb0",
+        }
+    }
 });
 
 function App() {
@@ -34,7 +58,7 @@ function App() {
         variables: { pageNumber: pageNumber + 1, searchText: searchQuery },
     });
 
-    const classes = useTableStyles();
+    const classes = useStyles();
     const breweries = query.data?.breweries;
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -43,7 +67,7 @@ function App() {
     };
 
     return (
-        <div className="App">
+        <div className={classes.app}>
             <form
                 className={classes.form}
                 noValidate
@@ -59,7 +83,7 @@ function App() {
                     onChange={(e) => setSearchText(e.target.value ?? "")}
                 />
             </form>
-            <TableContainer component={Paper}>
+            <TableContainer className={classes.tableRoot} component={Paper}>
                 <Table className={classes.table} aria-label="simple table">
                     <TableHead>
                         <TableRow>
@@ -95,6 +119,8 @@ function App() {
                             ))}
                     </TableBody>
                 </Table>
+            </TableContainer>
+            <div className={classes.paging}>
                 <Button
                     disabled={pageNumber === 0}
                     onClick={() => setPageNumber((p) => --p)}>
@@ -105,7 +131,8 @@ function App() {
                     onClick={() => setPageNumber((p) => ++p)}>
                     Next
                 </Button>
-            </TableContainer>
+            </div>
+
         </div>
     );
 }
