@@ -1,5 +1,5 @@
 # Intro
-This is nothing more than a basic fullstack application to play around with nestjs, graphql, and the OpenbreweryDB Api.
+This is nothing more than a basic full-stack application to play around with nestjs, graphql, and the [OpenBreweryDB](https://www.openbrewerydb.org) Api.
 
 ## Install dependencies
 Run an `npm install` in the root, backend, and frontend folders.
