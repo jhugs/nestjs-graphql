@@ -24,28 +24,28 @@ const useStyles = makeStyles({
     table: {
         minWidth: 650,
         border: "1px solid #fb0",
-        '& tr,th,tbody,td': {
+        "& tr,th,tbody,td": {
             borderColor: "#fb0",
-        }
+        },
     },
     form: {
         display: "flex",
         marginTop: 16,
         marginBottom: 16,
-        '& fieldset': {
-            borderColor: "#fb0"
-        }
+        "& fieldset": {
+            borderColor: "#fb0",
+        },
     },
     paging: {
         marginTop: 8,
-        '& button': {
-            '&:first-of-type': {
-                marginRight: 8
+        "& button": {
+            "&:first-of-type": {
+                marginRight: 8,
             },
             padding: 8,
             border: "1px solid #fb0",
-        }
-    }
+        },
+    },
 });
 
 function App() {
@@ -132,7 +132,6 @@ function App() {
                     Next
                 </Button>
             </div>
-
         </div>
     );
 }

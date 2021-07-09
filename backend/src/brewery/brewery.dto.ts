@@ -24,7 +24,7 @@ export class Brewery {
     readonly city: string;
 
     @Field({ nullable: true })
-    readonly state: string;
+    readonly state?: string;
 
     @Field({ nullable: true })
     readonly county_province?: string;
@@ -35,17 +35,17 @@ export class Brewery {
     @Field()
     readonly country: string;
 
-    @Field()
-    readonly longitude: string;
+    @Field({ nullable: true })
+    readonly longitude?: string;
 
-    @Field()
-    readonly latitude: string;
+    @Field({ nullable: true })
+    readonly latitude?: string;
 
     @Field()
     readonly phone: string;
 
-    @Field()
-    readonly website_url: string;
+    @Field({ nullable: true })
+    readonly website_url?: string;
 
     @Field()
     readonly updated_at: string;

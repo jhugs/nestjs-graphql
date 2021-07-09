@@ -14,10 +14,10 @@ type Brewery {
   county_province: String
   postal_code: String!
   country: String!
-  longitude: String!
-  latitude: String!
+  longitude: String
+  latitude: String
   phone: String!
-  website_url: String!
+  website_url: String
   updated_at: String!
   created_at: String!
 }

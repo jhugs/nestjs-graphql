@@ -1,6 +1,5 @@
-
 query ListBreweries($pageNumber: Float!, $searchText: String) {
-    breweries(pageNumber:$pageNumber, searchText: $searchText) {
+    breweries(pageNumber: $pageNumber, searchText: $searchText) {
         id
         name
         brewery_type
